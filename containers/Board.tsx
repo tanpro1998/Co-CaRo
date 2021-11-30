@@ -24,7 +24,7 @@ const calWinner = (squares: Player[]) => {
 };
 
 const Board = () => {
-  const [squares, setSquares] = useState(Array(16).fill(null));
+  const [squares, setSquares] = useState(Array(9).fill(null));
   const [currentPlayer, setCurrentPlayer] = useState<"X" | "O">(
     Math.round(Math.random() * 1) === 1 ? "X" : "O"
   );
@@ -42,7 +42,7 @@ const Board = () => {
   };
 
   const handleReset = () => {
-    setSquares(Array(16).fill(null));
+    setSquares(Array(9).fill(null));
     setWinner(null);
     setCurrentPlayer(Math.round(Math.random() * 1) === 1 ? "X" : "O");
   };
@@ -55,14 +55,14 @@ const Board = () => {
     if (!w && !squares.filter((square) => !square).length) {
       setWinner("BOTH!");
     }
-  });
+  },[squares]);
   return (
     <div>
       {!winner && <p>Hey {currentPlayer}, its your turn!</p>}
       {winner && winner !== "BOTH!" && <p>Good Job {winner}</p>}
       {winner && winner === "BOTH!" && <p>Good Job Both!</p>}
       <div className="grid">
-        {Array(16)
+        {Array(9)
           .fill(null)
           .map((_, i) => {
             return (
